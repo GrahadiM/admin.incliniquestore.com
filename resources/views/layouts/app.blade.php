@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
+
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -11,13 +12,22 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        <!-- Custome Styles CSS -->
+        <!-- Custom Styles CSS -->
         @stack('styles')
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <!-- Scripts & Styles -->
+        @if (env('APP_ENV') === 'local')
+            @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @elseif (env('APP_ENV') === 'production')
+            <!-- Tailwind CSS CDN untuk production -->
+            <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.13/dist/tailwind.min.css" rel="stylesheet">
+            <!-- Optional: jika ada JS, bisa pakai CDN atau bundle produksi -->
+            <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.0/dist/cdn.min.js" defer></script>
+        @endif
+
     </head>
     <body class="font-sans antialiased">
+
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
@@ -36,7 +46,7 @@
             </main>
         </div>
 
-        <!-- Custome Scripts JS -->
+        <!-- Custom Scripts JS -->
         @stack('scripts')
 
     </body>
