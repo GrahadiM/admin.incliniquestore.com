@@ -7,19 +7,6 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            @if (session('status') === 'account-activated')
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    <p class="text-green-600 mt-2">Your account has been activated successfully.</p>
-                </div>
-            </div>
-            @elseif (session('status') === 'account-already-active')
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    <p class="text-gray-600 mt-2">Your account is already active.</p>
-                </div>
-            </div>
-            @endif
 
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">
@@ -54,4 +41,32 @@
             @endif
         </div>
     </div>
+
+    {{-- SweetAlert --}}
+    @push('scripts')
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                @if (session('status') === 'account-activated')
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Account Activated',
+                        text: 'Your account has been activated successfully.',
+                        timer: 3000,
+                        timerProgressBar: true,
+                        showConfirmButton: false,
+                    });
+                @elseif (session('status') === 'account-already-active')
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Already Active',
+                        text: 'Your account is already active.',
+                        timer: 3000,
+                        timerProgressBar: true,
+                        showConfirmButton: false,
+                    });
+                @endif
+            });
+        </script>
+    @endpush
 </x-app-layout>
