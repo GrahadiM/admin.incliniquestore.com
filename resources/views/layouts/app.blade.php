@@ -21,7 +21,7 @@
         @elseif (env('APP_ENV') === 'production')
             <!-- Tailwind CSS CDN untuk production -->
             {{-- <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> --}}
-            <link rel="stylesheet" href="{{ asset('build/assets/app.css') }}">
+            <link rel="stylesheet" href="{{ asset('build/app.css') }}">
 
             <!-- Optional: jika ada JS, bisa pakai CDN atau bundle produksi -->
             <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.0/dist/cdn.min.js" defer></script>
