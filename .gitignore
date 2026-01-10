@@ -21,3 +21,10 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+
+# file from production
+.htaccess.example
+cache/
+composer-setup.php
+composer.phar
+public/error_log
