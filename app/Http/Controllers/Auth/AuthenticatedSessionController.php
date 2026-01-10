@@ -28,7 +28,7 @@ class AuthenticatedSessionController extends Controller
 
         $user = $request->user();
 
-        // Cek status user
+        // 1. Cek status user
         if ($user->status === 'inactive') {
             Auth::logout(); // logout langsung
             return redirect()->route('login')
@@ -38,6 +38,17 @@ class AuthenticatedSessionController extends Controller
                 ->withInput($request->only('email'));
         }
 
+        // 2. Cek role user (hanya admin / super-admin yang bisa login)
+        if (! $user->hasRole(['admin', 'super-admin'])) {
+            Auth::logout();
+            return redirect()->route('login')
+                ->withErrors([
+                    'email' => 'Akses ditolak. Hanya admin atau super-admin yang dapat masuk.',
+                ])
+                ->withInput($request->only('email'));
+        }
+
+        // Login success
         $request->session()->regenerate();
 
         return redirect()->intended(route('dashboard', absolute: false));
