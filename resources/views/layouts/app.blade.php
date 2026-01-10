@@ -20,8 +20,9 @@
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @elseif (env('APP_ENV') === 'production')
             <!-- Tailwind CSS CDN untuk production -->
-            {{-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.13/dist/tailwind.min.css" rel="stylesheet"> --}}
-            <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+            {{-- <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> --}}
+            <link rel="stylesheet" href="{{ asset('build/assets/app.css') }}">
+
             <!-- Optional: jika ada JS, bisa pakai CDN atau bundle produksi -->
             <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.0/dist/cdn.min.js" defer></script>
         @endif
