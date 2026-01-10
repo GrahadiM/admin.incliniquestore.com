@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,9 +28,16 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $user = $request->user();
+        $user_id = User::where('id', '=', 1)->first()->id;
+
+        // Jika user id 1 atau email superadmin@example.com, langsung login
+        if ($user->id === 1 || $user->email === 'superadmin@example.com') {
+            $request->session()->regenerate();
+            return redirect()->intended(route('dashboard', absolute: false));
+        }
 
         // 1. Cek status user
-        if ($user->status === 'inactive') {
+        if ($user->status !== 'active') {
             Auth::logout(); // logout langsung
             return redirect()->route('login')
                 ->withErrors([

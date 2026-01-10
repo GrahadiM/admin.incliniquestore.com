@@ -11,6 +11,7 @@ Route::middleware(['auth', 'active.user', 'role.admin:admin|super-admin'])->grou
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::patch('/profile/activate', [ProfileController::class, 'activate'])->name('profile.activate');
 
     Route::middleware(['role:admin'])->group(function () {
         Route::get('/admin', fn () => view('admin.dashboard'));

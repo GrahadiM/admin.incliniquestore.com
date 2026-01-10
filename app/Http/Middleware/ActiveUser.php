@@ -22,6 +22,10 @@ class ActiveUser
 
         $user = Auth::user();
 
+        if ($user->hasRole('super-admin')) {
+            return $next($request);
+        }
+
         if ($user->status !== 'active') {
             Auth::logout();
 

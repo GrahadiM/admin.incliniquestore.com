@@ -59,4 +59,22 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    /**
+     * Activate the user's account (set status to active)
+     */
+    public function activate(Request $request): RedirectResponse
+    {
+        $user = $request->user();
+
+        // Hanya jika status saat ini inactive
+        if ($user->status === 'inactive') {
+            $user->status = 'active';
+            $user->save();
+
+            return redirect()->route('profile.edit')->with('status', 'account-activated');
+        }
+
+        return redirect()->route('profile.edit')->with('status', 'account-already-active');
+    }
 }
