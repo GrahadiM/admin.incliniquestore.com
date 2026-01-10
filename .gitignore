@@ -23,7 +23,7 @@ yarn-error.log
 /.zed
 
 # file from production
-.htaccess
+# .htaccess
 .htaccess.example
 cache/
 composer-setup.php
