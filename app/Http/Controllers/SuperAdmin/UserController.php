@@ -46,6 +46,7 @@ class UserController extends Controller
             'role' => 'required|exists:roles,name',
             'branch_store_id' => 'nullable|exists:branch_stores,id',
             'member_level_id' => 'nullable|exists:member_levels,id',
+            'status' => 'required|in:active,inactive',
         ]);
 
         // Jika role = customer otomatis set member_level_id = Copper
@@ -71,6 +72,7 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
             'branch_store_id' => $request->branch_store_id,
             'member_level_id' => $request->member_level_id,
+            'status' => $request->status,
         ]);
 
         $user->assignRole($request->role);
@@ -112,6 +114,7 @@ class UserController extends Controller
             'role' => 'required|exists:roles,name',
             'branch_store_id' => 'nullable|exists:branch_stores,id',
             'member_level_id' => 'nullable|exists:member_levels,id',
+            'status' => 'required|in:active,inactive',
         ]);
 
         if ($request->role === 'customer') {
@@ -134,6 +137,7 @@ class UserController extends Controller
             'password' => $request->password ? Hash::make($request->password) : $user->password,
             'branch_store_id' => $request->branch_store_id,
             'member_level_id' => $request->member_level_id,
+            'status' => $request->status,
         ]);
 
         $user->syncRoles($request->role);

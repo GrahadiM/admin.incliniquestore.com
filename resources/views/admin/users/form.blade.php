@@ -82,6 +82,15 @@
                     </select>
                 </div>
 
+                <!-- Status -->
+                <div class="mb-4">
+                    <label class="block font-medium text-sm text-gray-700">Status</label>
+                    <select name="status" class="border rounded w-full px-3 py-2" required>
+                        <option value="active" @selected(old('status', $user->status ?? '') == 'active')>Active</option>
+                        <option value="inactive" @selected(old('status', $user->status ?? '') == 'inactive')>Inactive</option>
+                    </select>
+                </div>
+
                 <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
                     {{ $user->id ?? null ? 'Update' : 'Simpan' }}
                 </button>
