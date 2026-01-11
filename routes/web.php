@@ -21,7 +21,7 @@ Route::middleware(['auth', 'active.user', 'role:admin|super-admin'])->group(func
 
     // SUPER ADMIN ONLY
     Route::middleware(['role:super-admin'])->prefix('super-admin')->name('super-admin.')->group(function () {
-        Route::get('/dashboard', fn () => view('superadmin.dashboard'));
+        Route::get('/dashboard', fn () => view('super-admin.dashboard'));
 
         // Manage Users
         Route::resource('users', \App\Http\Controllers\SuperAdmin\UserController::class);
@@ -34,6 +34,9 @@ Route::middleware(['auth', 'active.user', 'role:admin|super-admin'])->group(func
 
         // Manage Vouchers
         Route::resource('vouchers', \App\Http\Controllers\SuperAdmin\VoucherController::class);
+
+        // Manage Categories
+        Route::resource('categories', \App\Http\Controllers\SuperAdmin\CategoryController::class);
     });
 });
 
