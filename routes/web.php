@@ -31,6 +31,9 @@ Route::middleware(['auth', 'active.user', 'role:admin|super-admin'])->group(func
 
         // Manage Member Levels
         Route::resource('member-levels', \App\Http\Controllers\SuperAdmin\MemberLevelController::class);
+
+        // Manage Vouchers
+        Route::resource('vouchers', \App\Http\Controllers\SuperAdmin\VoucherController::class);
     });
 });
 

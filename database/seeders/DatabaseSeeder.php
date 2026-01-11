@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             MemberLevelSeeder::class,
             UserSeeder::class,
             AddressSeeder::class,
+            VoucherSeeder::class,
         ]);
     }
 }

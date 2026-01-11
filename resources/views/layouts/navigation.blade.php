@@ -28,10 +28,10 @@
                         <x-nav-link :href="route('super-admin.member-levels.index')" :active="request()->routeIs('super-admin.member-levels.*')">
                             {{ __('Member Levels') }}
                         </x-nav-link>
-                        {{-- <x-nav-link :href="route('super-admin.vouchers.index')" :active="request()->routeIs('super-admin.vouchers.*')">
+                        <x-nav-link :href="route('super-admin.vouchers.index')" :active="request()->routeIs('super-admin.vouchers.*')">
                             {{ __('Manage Vouchers') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('super-admin.categories.index')" :active="request()->routeIs('super-admin.categories.*')">
+                        {{-- <x-nav-link :href="route('super-admin.categories.index')" :active="request()->routeIs('super-admin.categories.*')">
                             {{ __('Manage Categories') }}
                         </x-nav-link>
                         <x-nav-link :href="route('super-admin.products.index')" :active="request()->routeIs('super-admin.products.*')">
@@ -108,19 +108,19 @@
             </x-responsive-nav-link>
 
             @role('super-admin')
-                <x-responsive-nav-link :href="route('super-admin.users.index')">Manage Users</x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('super-admin.branches.index')">Manage Branches</x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('super-admin.member-levels.index')">Member Levels</x-responsive-nav-link>
-                {{-- <x-responsive-nav-link :href="route('super-admin.vouchers.index')">Manage Vouchers</x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('super-admin.categories.index')">Manage Categories</x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('super-admin.products.index')">Manage Products</x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('super-admin.reports.index')">Laporan Global</x-responsive-nav-link> --}}
+                <x-responsive-nav-link :href="route('super-admin.users.index')" :active="request()->routeIs('super-admin.users.*')">Manage Users</x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('super-admin.branches.index')" :active="request()->routeIs('super-admin.branches.*')">Manage Branches</x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('super-admin.member-levels.index')" :active="request()->routeIs('super-admin.member-levels.*')">Member Levels</x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('super-admin.vouchers.index')" :active="request()->routeIs('super-admin.vouchers.*')">Manage Vouchers</x-responsive-nav-link>
+                {{-- <x-responsive-nav-link :href="route('super-admin.categories.index')" :active="request()->routeIs('super-admin.categories.*')">Manage Categories</x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('super-admin.products.index')" :active="request()->routeIs('super-admin.products.*')">Manage Products</x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('super-admin.reports.index')" :active="request()->routeIs('super-admin.reports.*')">Laporan Global</x-responsive-nav-link> --}}
             @endrole
 
             @role('admin')
-                {{-- <x-responsive-nav-link :href="route('admin.stocks.index')">Stok Branch</x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('admin.orders.index')">Order Branch</x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('admin.reports.index')">Laporan Branch</x-responsive-nav-link> --}}
+                {{-- <x-responsive-nav-link :href="route('admin.stocks.index')" :active="request()->routeIs('super-admin.stocks.*')">Stok Branch</x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('super-admin.orders.*')">Order Branch</x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.reports.index')" :active="request()->routeIs('super-admin.reports.*')">Laporan Branch</x-responsive-nav-link> --}}
             @endrole
         </div>
 

@@ -19,4 +19,9 @@ class MemberLevel extends Model
     {
         return $this->hasMany(User::class, 'member_level_id');
     }
+
+    public function vouchers()
+    {
+        return $this->hasMany(Voucher::class, 'member_level_id');
+    }
 }
