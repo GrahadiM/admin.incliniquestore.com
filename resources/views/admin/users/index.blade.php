@@ -29,6 +29,7 @@
                         <th>Role</th>
                         <th>Branch</th>
                         <th>Member Level</th>
+                        <th>Status</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -40,7 +41,8 @@
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->roles->pluck('name')->join(', ') }}</td>
                         <td>{{ $user->branch?->name ?? '-' }}</td>
-                        <td>{{ $user->memberLevel?->name ?? '-' }}</td>
+                        <td>{{ ucfirst($user->memberLevel?->name) ?? '-' }}</td>
+                        <td>{{ ucfirst($user->status) }}</td>
                         <td class="flex gap-2">
                             @if (!empty($user->whatsapp))
                             <a href="http://wa.me/{{ $user->whatsapp }}" class="px-2 py-1 bg-green-600 text-white rounded hover:bg-green-700 transition text-sm" target="_blank" rel="noopener noreferrer">
