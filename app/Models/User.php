@@ -23,7 +23,10 @@ class User extends Authenticatable
         'email',
         'password',
         'whatsapp',
-        'gender'
+        'gender',
+        'branch_store_id',
+        'member_level_id',
+        'status',
     ];
 
     /**
@@ -47,6 +50,16 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function memberLevel()
+    {
+        return $this->belongsTo(MemberLevel::class);
+    }
+
+    public function branchStores()
+    {
+        return $this->hasMany(BranchStore::class);
     }
 
     public function addresses()

@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () { return redirect()->route('login'); });
-Route::get('/test', function () { abort(511); });
+Route::get('/test', function () { abort(404); });
 
 Route::middleware(['auth', 'active.user', 'role.admin:admin|super-admin'])->group(function () {
     Route::get('/dashboard', fn () => view('dashboard'))->name('dashboard');

@@ -3,11 +3,13 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\BranchStore;
+use App\Models\MemberLevel;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use Illuminate\Support\Facades\Hash;
 use function Symfony\Component\Clock\now;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserSeeder extends Seeder
 {
@@ -16,6 +18,9 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        $jakartaBranch = BranchStore::where('code', 'JKT')->first();
+        $copperLevel = MemberLevel::where('name', 'Copper')->first();
+
         $users = [
             [
                 'name' => 'Super Admin',
@@ -25,17 +30,16 @@ class UserSeeder extends Seeder
                 'gender' => 'male',
                 'role' => 'super-admin',
                 'email_verified_at' => now(),
-                'created_at' => now(),
             ],
             [
-                'name' => 'Admin User',
-                'email' => 'admin@example.com',
+                'name' => 'Admin Jakarta',
+                'email' => 'admin.jkt@example.com',
                 'password' => Hash::make('password'),
                 'whatsapp' => '6285767113554',
                 'gender' => 'male',
+                'branch_store_id' => $jakartaBranch?->id,
                 'role' => 'admin',
                 'email_verified_at' => now(),
-                'created_at' => now(),
             ],
             [
                 'name' => 'Member User',
@@ -43,15 +47,8 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('password'),
                 'whatsapp' => '6285767113554',
                 'gender' => 'male',
+                'member_level_id' => $copperLevel?->id,
                 'role' => 'member',
-            ],
-            [
-                'name' => 'Customer User',
-                'email' => 'customer@example.com',
-                'password' => Hash::make('password'),
-                'whatsapp' => '6285767113554',
-                'gender' => 'female',
-                'role' => 'customer',
             ],
         ];
 
