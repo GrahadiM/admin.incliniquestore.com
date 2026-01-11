@@ -12,9 +12,49 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    {{-- SUPER ADMIN MENU --}}
+                    @role('super-admin')
+                        <x-nav-link :href="route('super-admin.users.index')" :active="request()->routeIs('super-admin.users.*')">
+                            {{ __('Manage Users') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('super-admin.branches.index')" :active="request()->routeIs('super-admin.branches.*')">
+                            {{ __('Manage Branches') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('super-admin.member-levels.index')" :active="request()->routeIs('super-admin.member-levels.*')">
+                            {{ __('Member Levels') }}
+                        </x-nav-link>
+                        {{-- <x-nav-link :href="route('super-admin.vouchers.index')" :active="request()->routeIs('super-admin.vouchers.*')">
+                            {{ __('Manage Vouchers') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('super-admin.categories.index')" :active="request()->routeIs('super-admin.categories.*')">
+                            {{ __('Manage Categories') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('super-admin.products.index')" :active="request()->routeIs('super-admin.products.*')">
+                            {{ __('Manage Products') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('super-admin.reports.index')" :active="request()->routeIs('super-admin.reports.*')">
+                            {{ __('Laporan Global') }}
+                        </x-nav-link> --}}
+                    @endrole
+
+                    {{-- ADMIN CABANG MENU --}}
+                    @role('admin')
+                        {{-- <x-nav-link :href="route('admin.stocks.index')" :active="request()->routeIs('admin.stocks.*')">
+                            {{ __('Stok Branch') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('admin.orders.*')">
+                            {{ __('Order Branch') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.reports.index')" :active="request()->routeIs('admin.reports.*')">
+                            {{ __('Laporan Branch') }}
+                        </x-nav-link> --}}
+                    @endrole
+
                 </div>
             </div>
 
@@ -24,7 +64,6 @@
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                             <div>{{ Auth::user()->name }}</div>
-
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -41,10 +80,7 @@
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
+                            <x-dropdown-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
@@ -70,6 +106,22 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            @role('super-admin')
+                <x-responsive-nav-link :href="route('super-admin.users.index')">Manage Users</x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('super-admin.branches.index')">Manage Branches</x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('super-admin.member-levels.index')">Member Levels</x-responsive-nav-link>
+                {{-- <x-responsive-nav-link :href="route('super-admin.vouchers.index')">Manage Vouchers</x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('super-admin.categories.index')">Manage Categories</x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('super-admin.products.index')">Manage Products</x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('super-admin.reports.index')">Laporan Global</x-responsive-nav-link> --}}
+            @endrole
+
+            @role('admin')
+                {{-- <x-responsive-nav-link :href="route('admin.stocks.index')">Stok Branch</x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.orders.index')">Order Branch</x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.reports.index')">Laporan Branch</x-responsive-nav-link> --}}
+            @endrole
         </div>
 
         <!-- Responsive Settings Options -->
@@ -80,18 +132,11 @@
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
-
-                <!-- Authentication -->
+                <x-responsive-nav-link :href="route('profile.edit')">Profile</x-responsive-nav-link>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-
-                    <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                    <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
+                        Log Out
                     </x-responsive-nav-link>
                 </form>
             </div>

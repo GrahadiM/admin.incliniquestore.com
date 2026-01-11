@@ -52,14 +52,20 @@ class User extends Authenticatable
         ];
     }
 
-    public function memberLevel()
+    // Scope active
+    public function scopeActive($query)
     {
-        return $this->belongsTo(MemberLevel::class);
+        return $query->where('status', 'active');
     }
 
-    public function branchStores()
+    public function branch()
     {
-        return $this->hasMany(BranchStore::class);
+        return $this->belongsTo(BranchStore::class, 'branch_store_id');
+    }
+
+    public function memberLevel()
+    {
+        return $this->belongsTo(MemberLevel::class, 'member_level_id');
     }
 
     public function addresses()

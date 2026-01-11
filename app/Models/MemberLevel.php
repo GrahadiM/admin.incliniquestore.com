@@ -9,8 +9,14 @@ class MemberLevel extends Model
     protected $table = 'member_levels';
     protected $guarded = [];
 
-    public function members()
+    // Scope active
+    public function scopeActive($query)
     {
-        return $this->hasMany(User::class);
+        return $query->where('status', 'active');
+    }
+
+    public function users()
+    {
+        return $this->hasMany(User::class, 'member_level_id');
     }
 }
