@@ -75,8 +75,8 @@
         <script>
             $(document).ready(function () {
                 $('#branches-table').DataTable({
-                    responsive: true,
-                    columnDefs: [{ orderable: false, targets: 10 }],
+                    // responsive: true,
+                    columnDefs: [{ orderable: false, targets: 10 }], // non-orderable column "Aksi"
                     pageLength: 10,
                     lengthMenu: [10,25,50,100]
                 });

@@ -41,15 +41,15 @@
                             <td>{{ ucfirst($level->status) }}</td>
                             <td>{{ $level->users_count }}</td>
                             <td class="flex gap-2">
-                                <a href="{{ route('super-admin.member-levels.show', $level) }}" class="bg-blue-600 px-2 py-1 text-white rounded hover:bg-blue-700">Lihat</a>
-                                <a href="{{ route('super-admin.member-levels.edit', $level) }}" class="bg-yellow-400 px-2 py-1 text-white rounded hover:bg-yellow-500">Edit</a>
+                                <a href="{{ route('super-admin.member-levels.show', $level) }}" class="bg-blue-600 px-2 py-1 text-white rounded hover:bg-blue-700 text-sm">Lihat</a>
+                                <a href="{{ route('super-admin.member-levels.edit', $level) }}" class="bg-yellow-400 px-2 py-1 text-white rounded hover:bg-yellow-500 text-sm">Edit</a>
 
                                 <form action="{{ route('super-admin.member-levels.destroy', $level) }}" method="POST" class="delete-form">
                                     @csrf
                                     @method('DELETE')
                                     <button
                                         type="submit"
-                                        class="bg-red-600 px-2 py-1 text-white rounded hover:bg-red-700"
+                                        class="bg-red-600 px-2 py-1 text-white rounded hover:bg-red-700 text-sm delete-btn"
                                         {{-- @if($level->users->count() <= 0) disabled title="Level digunakan oleh user, tidak bisa dihapus" @endif --}}
                                     >
                                         Hapus
@@ -72,10 +72,8 @@
             $(document).ready(function() {
                 // DataTables
                 $('#levels-table').DataTable({
-                    responsive: true,
-                    columnDefs: [
-                        { orderable: false, targets: 8 } // kolom aksi
-                    ],
+                    // responsive: true,
+                    columnDefs: [{ orderable: false, targets: 8 }], // non-orderable column "Aksi"
                     pageLength: 10,
                     lengthMenu: [10, 25, 50, 100],
                     language: {

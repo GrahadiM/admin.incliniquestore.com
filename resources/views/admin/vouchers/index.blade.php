@@ -91,8 +91,7 @@
                                     Edit
                                 </a>
 
-                                <form action="{{ route('super-admin.vouchers.destroy', $voucher) }}"
-                                      method="POST" class="delete-form">
+                                <form action="{{ route('super-admin.vouchers.destroy', $voucher) }}" method="POST" class="delete-form">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button"
@@ -120,10 +119,8 @@
         <script>
             $(document).ready(function () {
                 $('#vouchers-table').DataTable({
-                    responsive: true,
-                    columnDefs: [
-                        { orderable: false, targets: 10 }
-                    ],
+                    // responsive: true,
+                    columnDefs: [{ orderable: false, targets: 10 }], // non-orderable column "Aksi"
                     pageLength: 10,
                     lengthMenu: [10, 25, 50, 100],
                     language: {

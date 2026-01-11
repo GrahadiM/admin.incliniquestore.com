@@ -81,10 +81,8 @@
             $(document).ready(function () {
                 // DataTables init
                 $('#users-table').DataTable({
-                    responsive: true,
-                    columnDefs: [
-                        { orderable: false, targets: 6 } // non-orderable column "Aksi"
-                    ],
+                    // responsive: true,
+                    columnDefs: [{ orderable: false, targets: 6 }], // non-orderable column "Aksi"
                     pageLength: 10,
                     lengthMenu: [10, 25, 50, 100],
                     language: {
