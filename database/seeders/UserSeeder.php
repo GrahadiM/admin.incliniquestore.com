@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $jakartaBranch = BranchStore::where('code', 'JKT')->first();
+        $bandungBranch = BranchStore::where('code', 'BDG')->first();
         $copperLevel = MemberLevel::where('name', 'Copper')->first();
 
         $users = [
@@ -42,6 +43,16 @@ class UserSeeder extends Seeder
                 'email_verified_at' => now(),
             ],
             [
+                'name' => 'Admin Bandung',
+                'email' => 'admin.bdg@example.com',
+                'password' => Hash::make('password'),
+                'whatsapp' => '6285767113554',
+                'gender' => 'male',
+                'branch_store_id' => $bandungBranch?->id,
+                'role' => 'admin',
+                'email_verified_at' => now(),
+            ],
+            [
                 'name' => 'Member User',
                 'email' => 'member@example.com',
                 'password' => Hash::make('password'),
@@ -49,6 +60,14 @@ class UserSeeder extends Seeder
                 'gender' => 'male',
                 'member_level_id' => $copperLevel?->id,
                 'role' => 'member',
+            ],
+            [
+                'name' => 'Customer User',
+                'email' => 'customer@example.com',
+                'password' => Hash::make('password'),
+                'whatsapp' => '6285767113554',
+                'gender' => 'male',
+                'role' => 'customer',
             ],
         ];
 
