@@ -148,9 +148,10 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        $user->status = 'inactive';
+        $user->status = 'deleted';
         $user->save();
         // $user->delete();
+
         return back()->with('success', 'User berhasil dihapus.');
     }
 }

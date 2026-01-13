@@ -47,7 +47,13 @@
                         <td>{{ $branch->province ?? '-' }}</td>
                         <td>{{ $branch->country ?? '-' }}</td>
                         <td>{{ $branch->postal_code ?? '-' }}</td>
-                        <td>{{ ucfirst($branch->status) }}</td>
+                        <td>
+                            @if($branch->status === 'active')
+                                <span class="px-2 py-1 text-xs bg-green-100 text-green-800 rounded">Active</span>
+                            @else
+                                <span class="px-2 py-1 text-xs bg-red-100 text-red-800 rounded">Inactive</span>
+                            @endif
+                        </td>
                         <td class="flex gap-2">
                             <a href="{{ route('super-admin.branches.show', $branch) }}" class="px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm">Lihat</a>
                             <a href="{{ route('super-admin.branches.edit', $branch) }}" class="px-2 py-1 bg-yellow-400 text-white rounded hover:bg-yellow-500 text-sm">Edit</a>

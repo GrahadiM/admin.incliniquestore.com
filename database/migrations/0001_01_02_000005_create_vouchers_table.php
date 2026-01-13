@@ -24,7 +24,7 @@ return new class extends Migration
             $table->date('end_date')->nullable();
             $table->integer('quota')->nullable(); // jumlah pemakaian
             $table->integer('used')->default(0); // sudah dipakai
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('status', ['active', 'inactive', 'deleted'])->default('active');
             $table->timestamps();
         });
     }

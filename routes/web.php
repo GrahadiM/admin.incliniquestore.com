@@ -37,6 +37,9 @@ Route::middleware(['auth', 'active.user', 'role:admin|super-admin'])->group(func
 
         // Manage Categories
         Route::resource('categories', \App\Http\Controllers\SuperAdmin\CategoryController::class);
+
+        // Manage Products
+        Route::resource('products', \App\Http\Controllers\SuperAdmin\ProductController::class);
     });
 });
 

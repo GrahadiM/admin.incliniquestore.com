@@ -20,12 +20,12 @@
                     <tr>
                         <th>ID</th>
                         <th>Nama</th>
+                        <th>Jumlah User</th>
                         <th>Min Points</th>
                         <th>Min Purchase</th>
                         <th>Min Payment</th>
                         <th>Discount %</th>
                         <th>Status</th>
-                        <th>Jumlah User</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -34,12 +34,18 @@
                         <tr>
                             <td>{{ $level->id }}</td>
                             <td>{{ $level->name }}</td>
+                            <td>{{ $level->users_count }}</td>
                             <td>{{ number_format($level->min_points) }}</td>
                             <td>{{ number_format($level->min_purchase) }}</td>
                             <td>Rp{{ number_format($level->min_payment, 0, ',', '.') }}</td>
                             <td>{{ $level->discount_percent }}%</td>
-                            <td>{{ ucfirst($level->status) }}</td>
-                            <td>{{ $level->users_count }}</td>
+                            <td>
+                                @if($level->status === 'active')
+                                    <span class="px-2 py-1 text-xs bg-green-100 text-green-800 rounded">Active</span>
+                                @else
+                                    <span class="px-2 py-1 text-xs bg-red-100 text-red-800 rounded">Inactive</span>
+                                @endif
+                            </td>
                             <td class="flex gap-2">
                                 <a href="{{ route('super-admin.member-levels.show', $level) }}" class="bg-blue-600 px-2 py-1 text-white rounded hover:bg-blue-700 text-sm">Lihat</a>
                                 <a href="{{ route('super-admin.member-levels.edit', $level) }}" class="bg-yellow-400 px-2 py-1 text-white rounded hover:bg-yellow-500 text-sm">Edit</a>

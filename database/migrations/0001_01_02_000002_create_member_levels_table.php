@@ -18,7 +18,7 @@ return new class extends Migration
             $table->bigInteger('min_purchase')->default(0)->comment('Minimal pembelian');
             $table->bigInteger('min_payment')->default(0)->comment('Minimal pembayaran');
             $table->decimal('discount_percent', 5, 2)->default(0);
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('status', ['active', 'inactive', 'deleted'])->default('active');
             $table->timestamps();
         });
     }

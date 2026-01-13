@@ -78,9 +78,10 @@ class MemberLevelController extends Controller
         if($memberLevel->users->count() > 0 || $memberLevel->users->count() != NULL)
             return back()->with('error', 'Member Level tidak dapat dihapus karena masih memiliki user.');
 
-        $memberLevel->status = 'inactive';
+        $memberLevel->status = 'deleted';
         $memberLevel->save();
         // $memberLevel->delete();
+
         return back()->with('success', 'Member Level berhasil dihapus.');
     }
 }

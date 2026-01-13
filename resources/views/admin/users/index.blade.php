@@ -42,7 +42,13 @@
                         <td>{{ $user->roles->pluck('name')->join(', ') }}</td>
                         <td>{{ $user->branch?->name ?? '-' }}</td>
                         <td>{{ ucfirst($user->memberLevel?->name) ?? '-' }}</td>
-                        <td>{{ ucfirst($user->status) }}</td>
+                        <td>
+                            @if($user->status === 'active')
+                                <span class="px-2 py-1 text-xs bg-green-100 text-green-800 rounded">Active</span>
+                            @else
+                                <span class="px-2 py-1 text-xs bg-red-100 text-red-800 rounded">Inactive</span>
+                            @endif
+                        </td>
                         <td class="flex gap-2">
                             @if (!empty($user->whatsapp))
                             <a href="http://wa.me/{{ $user->whatsapp }}" class="px-2 py-1 bg-green-600 text-white rounded hover:bg-green-700 transition text-sm" target="_blank" rel="noopener noreferrer">

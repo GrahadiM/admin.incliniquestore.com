@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('whatsapp')->nullable()->after('email');
             $table->enum('gender', ['male', 'female'])->nullable()->after('whatsapp');
-            $table->enum('status', ['active', 'inactive'])->default('active')->after('password');
+            $table->enum('status', ['active', 'inactive', 'deleted'])->default('active')->after('password');
             $table->foreignId('branch_store_id')->nullable()->after('id')->constrained('branch_stores')->nullOnDelete();
             $table->foreignId('member_level_id')->nullable()->after('branch_store_id')->constrained('member_levels')->nullOnDelete();
         });

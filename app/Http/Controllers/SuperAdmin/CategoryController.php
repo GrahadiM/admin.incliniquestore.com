@@ -78,10 +78,10 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        $category->delete();
+        $category->status = 'deleted';
+        $category->save();
+        // $category->delete();
 
-        return redirect()
-            ->route('super-admin.categories.index')
-            ->with('success', 'Category berhasil dihapus');
+        return redirect()->route('super-admin.categories.index')->with('success', 'Category berhasil dihapus');
     }
 }

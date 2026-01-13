@@ -76,9 +76,10 @@ class BranchController extends Controller
 
     public function destroy(BranchStore $branch)
     {
-        $branch->status = 'inactive';
+        $branch->status = 'deleted';
         $branch->save();
         // $branch->delete();
+
         return redirect()->route('super-admin.branches.index')->with('success', 'Branch berhasil dihapus.');
     }
 }

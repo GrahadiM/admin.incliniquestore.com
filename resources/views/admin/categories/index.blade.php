@@ -25,7 +25,6 @@
                         <th>Nama</th>
                         <th>Slug</th>
                         <th>Status</th>
-                        <th>Dibuat</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -35,8 +34,13 @@
                             <td>{{ $category->id }}</td>
                             <td>{{ $category->name }}</td>
                             <td>{{ $category->slug }}</td>
-                            <td>{{ ucfirst($category->status) }}</td>
-                            <td>{{ $category->created_at }}</td>
+                            <td>
+                                @if($category->status === 'active')
+                                    <span class="px-2 py-1 text-xs bg-green-100 text-green-800 rounded">Active</span>
+                                @else
+                                    <span class="px-2 py-1 text-xs bg-red-100 text-red-800 rounded">Inactive</span>
+                                @endif
+                            </td>
                             <td class="flex gap-2">
                                 <a href="{{ route('super-admin.categories.show', $category) }}"
                                    class="bg-blue-600 px-2 py-1 text-white rounded hover:bg-blue-700 text-sm">
@@ -75,7 +79,7 @@
         <script>
             $(document).ready(function() {
                 $('#categories-table').DataTable({
-                    columnDefs: [{ orderable: false, targets: 5 }],
+                    columnDefs: [{ orderable: false, targets: 4 }],
                     pageLength: 10,
                     lengthMenu: [10, 25, 50, 100],
                     language: {

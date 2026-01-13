@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('province');
             $table->string('postal_code');
             $table->boolean('is_default')->default(false);
+            $table->enum('status', ['active', 'inactive', 'deleted'])->default('active');
             $table->timestamps();
         });
     }

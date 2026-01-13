@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('province')->nullable();
             $table->string('country')->nullable();
             $table->string('postal_code')->nullable();
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('status', ['active', 'inactive', 'deleted'])->default('active');
             $table->timestamps();
         });
     }
