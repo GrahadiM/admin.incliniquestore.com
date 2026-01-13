@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
     @endpush
 
-    <div class="py-6 max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="px-2 py-6 max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="flex justify-between mb-4">
             <h2 class="text-xl font-bold">Products</h2>
             <a href="{{ route('super-admin.products.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded">
@@ -79,7 +79,26 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <script>
-            $('#products-table').DataTable();
+            $('#products-table').DataTable({
+                // responsive: true,
+                columnDefs: [{ orderable: false, targets: 10 }], // non-orderable column "Aksi"
+                pageLength: 10,
+                lengthMenu: [10, 25, 50, 100],
+                language: {
+                    search: "Cari:",
+                    lengthMenu: "Tampilkan _MENU_ data",
+                    info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                    infoEmpty: "Menampilkan 0 sampai 0 dari 0 data",
+                    infoFiltered: "(difilter dari _MAX_ total data)",
+                    paginate: {
+                        first: "Pertama",
+                        last: "Terakhir",
+                        next: "Berikutnya",
+                        previous: "Sebelumnya"
+                    },
+                    zeroRecords: "Data tidak ditemukan"
+                }
+            });
 
             $('.delete-form').submit(function(e){
                 e.preventDefault();

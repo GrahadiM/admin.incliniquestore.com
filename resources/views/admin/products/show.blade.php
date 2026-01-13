@@ -26,7 +26,7 @@
 
             <div>
                 <label class="font-semibold">Gallery</label>
-                <div class="grid grid-cols-4 gap-3 mt-2">
+                <div class="grid grid-cols-2 gap-3 mt-2">
                     @foreach($product->images as $img)
                         <img src="{{ Str::startsWith($img->image_path, 'http') ? $img->image_path : asset('storage/'.$img->image_path) }}">
                     @endforeach

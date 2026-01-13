@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
     @endpush
 
-    <div class="py-6 max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="px-2 py-6 max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-xl font-bold">Categories</h2>
             <a href="{{ route('super-admin.categories.create') }}"

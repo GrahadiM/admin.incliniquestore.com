@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
     @endpush
 
-    <div class="py-6 max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="px-2 py-6 max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-xl font-bold">{{ __('Manage Users') }}</h2>
             <a href="{{ route('super-admin.users.create') }}" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
@@ -41,7 +41,26 @@
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->roles->pluck('name')->join(', ') }}</td>
                         <td>{{ $user->branch?->name ?? '-' }}</td>
-                        <td>{{ ucfirst($user->memberLevel?->name) ?? '-' }}</td>
+                        <td>
+                            @php
+                                $levelName = strtolower($user->memberLevel?->name ?? '');
+
+                                $levelStyles = [
+                                    'copper' => 'bg-orange-100 text-orange-800 border border-orange-300',
+                                    'silver' => 'bg-gray-100 text-gray-800 border border-gray-300',
+                                    'gold' => 'bg-yellow-100 text-yellow-800 border border-yellow-300',
+                                    'platinum' => 'bg-sky-100 text-sky-800 border border-sky-300',
+                                    'diamond' => 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white',
+                                    'master' => 'bg-gradient-to-r from-red-500 to-fuchsia-600 text-white'
+                                ];
+
+                                $badgeClass = $levelStyles[$levelName] ?? 'bg-slate-100 text-slate-600 border border-slate-300';
+                            @endphp
+
+                            <span class="px-3 py-1 text-xs font-semibold rounded inline-flex items-center gap-1 {{ $badgeClass }}">
+                                {{ ucfirst($user->memberLevel?->name ?? '-') }}
+                            </span>
+                        </td>
                         <td>
                             @if($user->status === 'active')
                                 <span class="px-2 py-1 text-xs bg-green-100 text-green-800 rounded">Active</span>
