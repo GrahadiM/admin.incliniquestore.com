@@ -23,14 +23,14 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Code</th>
-                        <th>Phone</th>
+                        <th>Kode</th>
+                        <th>Nama</th>
+                        <th>WhatsApp</th>
                         {{-- <th>Email</th> --}}
-                        <th>City</th>
-                        {{-- <th>Province</th> --}}
-                        {{-- <th>Country</th> --}}
-                        {{-- <th>Postal Code</th> --}}
+                        <th>Kota</th>
+                        {{-- <th>Provinsi</th> --}}
+                        {{-- <th>Negara</th> --}}
+                        {{-- <th>Kode Pos</th> --}}
                         <th>Status</th>
                         <th>Aksi</th>
                     </tr>

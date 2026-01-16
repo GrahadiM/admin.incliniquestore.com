@@ -28,7 +28,7 @@
                         <th>Email</th>
                         <th>Role</th>
                         <th>Branch</th>
-                        <th>Member Level</th>
+                        <th>Member</th>
                         <th>Status</th>
                         <th>Aksi</th>
                     </tr>
