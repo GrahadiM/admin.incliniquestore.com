@@ -14,6 +14,7 @@ class VoucherController extends Controller
     public function index()
     {
         $vouchers = Voucher::with(['branch', 'memberLevel'])->latest()->get();
+
         return view('admin.vouchers.index', compact('vouchers'));
     }
 

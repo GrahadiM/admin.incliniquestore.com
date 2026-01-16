@@ -45,9 +45,9 @@
                             <td>{{ $voucher->name }}</td>
                             <td>
                                 @if($voucher->type === 'percent')
-                                    <span class="px-2 py-1 text-xs bg-indigo-100 text-indigo-800 rounded">Percent</span>
+                                    <span class="px-3 py-1 text-xs font-semibold bg-indigo-100 text-indigo-800 rounded border border-indigo-300">Percent</span>
                                 @else
-                                    <span class="px-2 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded border border-green-300">Nominal</span>
+                                    <span class="px-3 py-1 text-xs font-semibold bg-blue-100 text-blue-800 rounded border border-blue-300">Nominal</span>
                                 @endif
                             </td>
                             <td>
@@ -59,13 +59,28 @@
                             </td>
                             <td>Rp{{ number_format($voucher->min_transaction, 0, ',', '.') }}</td>
                             <td>
-                                @if($voucher->branchStore)
-                                    <span class="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded">
-                                        Branch: {{ $voucher->branchStore->name }}
+                                @php
+                                    $levelName = strtolower($voucher->memberLevel?->name ?? '');
+
+                                    $levelStyles = [
+                                        'copper' => 'bg-orange-100 text-orange-800 border border-orange-300',
+                                        'silver' => 'bg-gray-100 text-gray-800 border border-gray-300',
+                                        'gold' => 'bg-yellow-100 text-yellow-800 border border-yellow-300',
+                                        'platinum' => 'bg-sky-100 text-sky-800 border border-sky-300',
+                                        'diamond' => 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white',
+                                        'master' => 'bg-gradient-to-r from-red-500 to-fuchsia-600 text-white'
+                                    ];
+
+                                    $badgeClass = $levelStyles[$levelName] ?? 'bg-slate-100 text-slate-600 border border-slate-300';
+                                @endphp
+
+                                @if($voucher->branch)
+                                    <span class="px-3 py-1 text-xs font-semibold rounded inline-flex items-center gap-1 bg-blue-100 text-blue-800 border border-blue-300">
+                                        Cabang: {{ $voucher->branch?->code }}
                                     </span>
                                 @elseif($voucher->memberLevel)
-                                    <span class="text-sm bg-purple-100 text-purple-800 px-2 py-1 rounded">
-                                        Level: {{ $voucher->memberLevel->name }}
+                                    <span class="px-3 py-1 text-xs font-semibold rounded inline-flex items-center gap-1 {{ $badgeClass }}">
+                                        Level: {{ ucfirst($voucher->memberLevel?->name ?? '-') }}
                                     </span>
                                 @else
                                     -
