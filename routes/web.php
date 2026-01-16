@@ -1,22 +1,15 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () { return redirect()->route('login'); });
 Route::get('/test', function () { abort(404); });
 
 Route::middleware(['auth', 'active.user', 'role:admin|super-admin'])->group(function () {
     // Route::get('/dashboard', fn () => view('dashboard'))->name('dashboard');
-    Route::get('/dashboard', function () {
-        if (auth()->user()->hasRole('super-admin')) {
-            return redirect()->route('super-admin.dashboard');
-        } elseif (auth()->user()->hasRole('admin')) {
-            return redirect()->route('admin.dashboard');
-        } else {
-            return view('dashboard');
-        }
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -25,17 +18,12 @@ Route::middleware(['auth', 'active.user', 'role:admin|super-admin'])->group(func
 
     // ADMIN ONLY
     Route::middleware(['role:admin'])->prefix('admin')->name('admin.')->group(function () {
-        Route::get('/admin', fn () => view('admin.dashboard'))->name('dashboard');
+        Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
     });
 
     // SUPER ADMIN ONLY
     Route::middleware(['role:super-admin'])->prefix('super-admin')->name('super-admin.')->group(function () {
-        Route::get('/dashboard', fn () => view('super-admin.dashboard', [
-            'totalUsers' => \App\Models\User::count(),
-            'totalBranches' => \App\Models\BranchStore::count(),
-            'totalProducts' => \App\Models\Product::count(),
-            'totalVouchers' => \App\Models\Voucher::count(),
-        ]))->name('dashboard');
+        Route::get('/dashboard', [\App\Http\Controllers\SuperAdmin\DashboardController::class, 'index'])->name('dashboard');
 
         // Manage Users
         Route::resource('users', \App\Http\Controllers\SuperAdmin\UserController::class);
