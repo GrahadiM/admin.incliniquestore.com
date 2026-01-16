@@ -16,22 +16,26 @@
                 <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div>
                         <label class="block font-medium text-sm text-gray-700">Name</label>
-                        <input type="text" name="name" value="{{ old('name', $branch->name ?? '') }}" class="border rounded w-full px-3 py-2" required>
+                        <input type="text" name="name" value="{{ old('name', $branch->name ?? '') }}" class="border rounded w-full px-3 py-2 @error('name') border-red-500 ring-1 ring-red-500 @enderror" required>
                     </div>
                     <div>
                         <label class="block font-medium text-sm text-gray-700">Code</label>
-                        <input type="text" name="code" value="{{ old('code', $branch->code ?? '') }}" class="border rounded w-full px-3 py-2" required>
+                        <input type="text" name="code" value="{{ old('code', $branch->code ?? '') }}" class="border rounded w-full px-3 py-2 @error('name') border-red-500 ring-1 ring-red-500 @enderror" required>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div>
                         <label class="block font-medium text-sm text-gray-700">Phone</label>
-                        <input type="text" name="phone" value="{{ old('phone', $branch->phone ?? '') }}" class="border rounded w-full px-3 py-2">
+                        <input type="text" name="phone" value="{{ old('phone', $branch->phone ?? '') }}" class="border rounded w-full px-3 py-2 @error('name') border-red-500 ring-1 ring-red-500 @enderror"
+                               oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1'); this.setCustomValidity('');"
+                               oninvalid="this.setCustomValidity('Nomor Telepon wajib diisi.')"
+                               maxlength="20"
+                        >
                     </div>
                     <div>
                         <label class="block font-medium text-sm text-gray-700">Email</label>
-                        <input type="email" name="email" value="{{ old('email', $branch->email ?? '') }}" class="border rounded w-full px-3 py-2">
+                        <input type="email" name="email" value="{{ old('email', $branch->email ?? '') }}" class="border rounded w-full px-3 py-2 @error('name') border-red-500 ring-1 ring-red-500 @enderror">
                     </div>
                 </div>
 
@@ -39,47 +43,47 @@
                 <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div>
                         <label class="block font-medium text-sm text-gray-700">Latitude</label>
-                        <input type="text" name="latitude" id="latitude" value="{{ old('latitude', $branch->latitude ?? '') }}" class="border rounded w-full px-3 py-2" readonly>
+                        <input type="text" name="latitude" id="latitude" value="{{ old('latitude', $branch->latitude ?? '') }}" class="border rounded w-full px-3 py-2 @error('name') border-red-500 ring-1 ring-red-500 @enderror" readonly>
                     </div>
                     <div>
                         <label class="block font-medium text-sm text-gray-700">Longitude</label>
-                        <input type="text" name="longitude" id="longitude" value="{{ old('longitude', $branch->longitude ?? '') }}" class="border rounded w-full px-3 py-2" readonly>
+                        <input type="text" name="longitude" id="longitude" value="{{ old('longitude', $branch->longitude ?? '') }}" class="border rounded w-full px-3 py-2 @error('name') border-red-500 ring-1 ring-red-500 @enderror" readonly>
                     </div>
                 </div>
 
                 <!-- Address -->
                 <div>
                     <label class="block font-medium text-sm text-gray-700">Address</label>
-                    <textarea name="address" class="border rounded w-full px-3 py-2">{{ old('address', $branch->address ?? '') }}</textarea>
+                    <textarea name="address" class="border rounded w-full px-3 py-2 @error('name') border-red-500 ring-1 ring-red-500 @enderror">{{ old('address', $branch->address ?? '') }}</textarea>
                 </div>
 
                 <!-- City, Province, Country, Postal Code -->
                 <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div>
                         <label class="block font-medium text-sm text-gray-700">City</label>
-                        <input type="text" name="city" value="{{ old('city', $branch->city ?? '') }}" class="border rounded w-full px-3 py-2">
+                        <input type="text" name="city" value="{{ old('city', $branch->city ?? '') }}" class="border rounded w-full px-3 py-2 @error('name') border-red-500 ring-1 ring-red-500 @enderror">
                     </div>
                     <div>
                         <label class="block font-medium text-sm text-gray-700">Province</label>
-                        <input type="text" name="province" value="{{ old('province', $branch->province ?? '') }}" class="border rounded w-full px-3 py-2">
+                        <input type="text" name="province" value="{{ old('province', $branch->province ?? '') }}" class="border rounded w-full px-3 py-2 @error('name') border-red-500 ring-1 ring-red-500 @enderror">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div>
                         <label class="block font-medium text-sm text-gray-700">Country</label>
-                        <input type="text" name="country" value="{{ old('country', $branch->country ?? '') }}" class="border rounded w-full px-3 py-2">
+                        <input type="text" name="country" value="{{ old('country', $branch->country ?? '') }}" class="border rounded w-full px-3 py-2 @error('name') border-red-500 ring-1 ring-red-500 @enderror">
                     </div>
                     <div>
                         <label class="block font-medium text-sm text-gray-700">Postal Code</label>
-                        <input type="text" name="postal_code" value="{{ old('postal_code', $branch->postal_code ?? '') }}" class="border rounded w-full px-3 py-2">
+                        <input type="text" name="postal_code" value="{{ old('postal_code', $branch->postal_code ?? '') }}" class="border rounded w-full px-3 py-2 @error('name') border-red-500 ring-1 ring-red-500 @enderror">
                     </div>
                 </div>
 
                 <!-- Status -->
                 <div>
                     <label class="block font-medium text-sm text-gray-700">Status</label>
-                    <select name="status" class="border rounded w-full px-3 py-2" required>
+                    <select name="status" class="border rounded w-full px-3 py-2 @error('name') border-red-500 ring-1 ring-red-500 @enderror" required>
                         <option value="active" @selected(old('status', $branch->status ?? '')=='active')>Active</option>
                         <option value="inactive" @selected(old('status', $branch->status ?? '')=='inactive')>Inactive</option>
                     </select>
@@ -137,6 +141,60 @@
             }
 
             window.onload = initMap;
+
+            // SweetAlert for flash messages
+            document.addEventListener('DOMContentLoaded', function () {
+
+                // SUCCESS
+                @if(session('success'))
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil',
+                        text: "{{ session('success') }}",
+                        timer: 2500,
+                        showConfirmButton: false
+                    });
+                @endif
+
+                // GENERAL ERROR
+                @if(session('error'))
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal',
+                        text: "{{ session('error') }}",
+                        confirmButtonText: 'OK'
+                    });
+                @endif
+
+                // VALIDATION ERRORS
+                @if ($errors->any())
+                    let errors = `
+                        <ul style="text-align:left; padding-left:15px;">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    `;
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Data belum lengkap',
+                        html: errors,
+                        confirmButtonText: 'Perbaiki'
+                    });
+
+                    // Auto focus & highlight first error field
+                    @php
+                        $firstErrorField = array_key_first($errors->toArray());
+                    @endphp
+
+                    const firstField = document.querySelector('[name="{{ $firstErrorField }}"]');
+                    if (firstField) {
+                        firstField.focus();
+                        firstField.classList.add('border-red-500', 'ring-1', 'ring-red-500');
+                    }
+                @endif
+            });
         </script>
     @endpush
 </x-app-layout>

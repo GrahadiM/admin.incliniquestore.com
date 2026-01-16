@@ -23,8 +23,8 @@
                     <input type="text" name="whatsapp" value="{{ old('whatsapp', $user->whatsapp ?? '') }}" class="border rounded w-full px-3 py-2" required
                         placeholder="Contoh: 6281234567890"
                         oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1'); this.setCustomValidity('');"
-                        maxlength="15"
                         oninvalid="this.setCustomValidity('Nomor WhatsApp wajib diisi.')"
+                        maxlength="20"
                     >
                 </div>
 
@@ -36,12 +36,12 @@
 
                 <!-- Password -->
                 <div class="mb-4">
-                    <label class="block font-medium text-sm text-gray-700">Password @if(isset($user->id))(Kosongkan jika tidak diubah)@endif</label>
+                    <label class="block font-medium text-sm text-gray-700">Password @if(isset($user->id)) <span class="text-red-800">*kosongkan jika tidak perlu diubah!</span>@endif</label>
                     <input type="password" name="password" class="border rounded w-full px-3 py-2" {{ isset($user->id) ? '' : 'required' }}>
                 </div>
 
                 <div class="mb-4">
-                    <label class="block font-medium text-sm text-gray-700">Konfirmasi Password</label>
+                    <label class="block font-medium text-sm text-gray-700">Konfirmasi Password  @if(isset($user->id)) <span class="text-red-800">*kosongkan jika tidak perlu diubah!</span>@endif</label>
                     <input type="password" name="password_confirmation" class="border rounded w-full px-3 py-2" {{ isset($user->id) ? '' : 'required' }}>
                 </div>
 

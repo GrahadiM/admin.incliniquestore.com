@@ -53,9 +53,9 @@
                             </td>
                             <td>
                                 @if($product->status === 'active')
-                                    <span class="px-2 py-1 text-xs bg-green-100 text-green-800 rounded">Active</span>
+                                    <span class="px-2 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded border border-green-300">Active</span>
                                 @else
-                                    <span class="px-2 py-1 text-xs bg-red-100 text-red-800 rounded">Inactive</span>
+                                    <span class="px-2 py-1 text-xs font-semibold bg-red-100 text-red-800 rounded border border-red-300">Inactive</span>
                                 @endif
                             </td>
                             <td class="flex justify-start gap-2">
@@ -76,7 +76,6 @@
     @push('scripts')
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <script>
             $('#products-table').DataTable({

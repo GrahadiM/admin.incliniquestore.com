@@ -17,9 +17,9 @@ class BranchStoreSeeder extends Seeder
             [
                 'name' => 'Cabang Jakarta',
                 'code' => 'JKT',
-                'phone' => '0210000001',
+                'phone' => '6285767113554',
                 'address' => 'Jl. Sudirman No. 1',
-                'city' => 'Jakarta',
+                'city' => 'Kota Jakarta',
                 'province' => 'DKI Jakarta',
                 'country' => 'Indonesia',
                 'postal_code' => '10110',
@@ -29,9 +29,9 @@ class BranchStoreSeeder extends Seeder
             [
                 'name' => 'Cabang Bandung',
                 'code' => 'BDG',
-                'phone' => '0220000002',
+                'phone' => '6285767113554',
                 'address' => 'Jl. Asia Afrika No. 2',
-                'city' => 'Bandung',
+                'city' => 'Kota Bandung',
                 'province' => 'Jawa Barat',
                 'country' => 'Indonesia',
                 'postal_code' => '40123',

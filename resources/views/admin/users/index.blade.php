@@ -40,7 +40,11 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->roles->pluck('name')->join(', ') }}</td>
-                        <td>{{ $user->branch?->name ?? '-' }}</td>
+                        <td>
+                            <span class="px-3 py-1 text-xs font-semibold inline-flex items-center gap-1 bg-blue-100 text-blue-800 rounded border border-blue-300">
+                                {{ ($user->branch?->code ?? '').' - '.($user->branch?->name ?? '') }}
+                            </span>
+                        </td>
                         <td>
                             @php
                                 $levelName = strtolower($user->memberLevel?->name ?? '');
@@ -63,9 +67,9 @@
                         </td>
                         <td>
                             @if($user->status === 'active')
-                                <span class="px-2 py-1 text-xs bg-green-100 text-green-800 rounded">Active</span>
+                                <span class="px-2 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded border border-green-300">Active</span>
                             @else
-                                <span class="px-2 py-1 text-xs bg-red-100 text-red-800 rounded">Inactive</span>
+                                <span class="px-2 py-1 text-xs font-semibold bg-red-100 text-red-800 rounded border border-red-300">Inactive</span>
                             @endif
                         </td>
                         <td class="flex gap-2">
@@ -98,7 +102,6 @@
     {{-- Scripts DataTables --}}
     @push('scripts')
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
 
