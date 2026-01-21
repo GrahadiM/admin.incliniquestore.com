@@ -75,7 +75,7 @@ class ProductSeeder extends Seeder
                 'price'       => $item['price'],
                 'thumbnail'   => $item['thumbnail'],
                 'is_featured' => $item['is_featured'],
-                'status'      => 'active'
+                'status'      => 'published',
             ]);
 
             foreach ($item['gallery'] as $img) {

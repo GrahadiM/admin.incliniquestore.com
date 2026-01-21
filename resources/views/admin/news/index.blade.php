@@ -1,69 +1,71 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Manage Products
+            Manage News
         </h2>
     </x-slot>
 
     @push('styles')
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
     @endpush
 
     <div class="px-2 py-6 max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="flex justify-between mb-4">
-            <h2 class="text-xl font-bold">Products</h2>
-            <a href="{{ route('super-admin.products.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded">
-                Tambah Product
-            </a>
+            <h2 class="text-xl font-bold">News</h2>
+            <div class="flex gap-2">
+                <a href="{{ route('super-admin.news.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded">
+                    Tambah Berita
+                </a>
+                <a href="{{ route('super-admin.news.analytics') }}" class="bg-green-600 text-white px-4 py-2 rounded">
+                    Analytics
+                </a>
+            </div>
         </div>
 
         <div class="overflow-x-auto bg-white shadow-sm sm:rounded-lg p-4">
-            <table id="products-table" class="display nowrap w-full">
+            <table id="news-table" class="display w-full">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Thumbnail</th>
-                        <th>Nama</th>
-                        <th>Kategori</th>
-                        <th>Harga</th>
+                        <th>Judul</th>
+                        <th>Slug</th>
                         <th>Unggulan</th>
                         <th>Status</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($products as $product)
+                    @foreach($news as $item)
                         <tr>
-                            <td>{{ $product->id }}</td>
+                            <td>{{ $item->id }}</td>
                             <td>
-                                @if($product->thumbnail)
-                                    <img src="{{ asset('storage/'.$product->thumbnail) }}" alt="{{ $product->name }}" class="w-16 rounded">
+                                @if($item->thumbnail)
+                                    <img src="{{ asset('storage/'.$item->thumbnail) }}" class="w-16 rounded">
                                 @endif
                             </td>
-                            <td>{{ $product->name }}</td>
-                            <td>{{ $product->category?->name }}</td>
-                            <td>Rp{{ number_format($product->price,0,',','.') }}</td>
+                            <td>{{ $item->title }}</td>
+                            <td>{{ $item->slug }}</td>
                             <td>
-                                @if($product->is_featured)
+                                @if($item->is_featured)
                                     <span class="px-2 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded border border-green-300">Yes</span>
                                 @else
                                     <span class="px-2 py-1 text-xs font-semibold bg-red-100 text-red-800 rounded border border-red-300">No</span>
                                 @endif
                             </td>
                             <td>
-                                @if($product->status === 'published')
+                                @if($item->status === 'published')
                                     <span class="px-2 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded border border-green-300">Published</span>
                                 @else
                                     <span class="px-2 py-1 text-xs font-semibold bg-red-100 text-red-800 rounded border border-red-300">Draft</span>
                                 @endif
                             </td>
-                            <td class="flex justify-start gap-2">
-                                <a href="{{ route('super-admin.products.show', $product) }}" class="bg-blue-600 px-2 py-1 text-white rounded text-sm">Lihat</a>
-                                <a href="{{ route('super-admin.products.edit', $product) }}" class="bg-yellow-400 px-2 py-1 text-white rounded text-sm">Edit</a>
-                                <form action="{{ route('super-admin.products.destroy', $product) }}" method="POST" class="delete-form">
+                            <td class="flex gap-2">
+                                <a href="{{ route('super-admin.news.show',$item) }}" class="bg-blue-600 px-2 py-1 text-white rounded text-sm">Lihat</a>
+                                <a href="{{ route('super-admin.news.edit',$item) }}" class="bg-yellow-400 px-2 py-1 text-white rounded text-sm">Edit</a>
+                                <form action="{{ route('super-admin.news.destroy',$item) }}" method="POST" class="delete-form">
                                     @csrf @method('DELETE')
-                                    <button type="submit" class="bg-red-600 px-2 py-1 text-white rounded text-sm">Hapus</button>
+                                    <button class="bg-red-600 px-2 py-1 text-white rounded text-sm">Hapus</button>
                                 </form>
                             </td>
                         </tr>
@@ -76,28 +78,10 @@
     @push('scripts')
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <script>
-            $('#products-table').DataTable({
-                // responsive: true,
-                columnDefs: [{ orderable: false, targets: 6 }], // non-orderable column "Aksi"
-                pageLength: 10,
-                lengthMenu: [10, 25, 50, 100],
-                language: {
-                    search: "Cari:",
-                    lengthMenu: "Tampilkan _MENU_ data",
-                    info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
-                    infoEmpty: "Menampilkan 0 sampai 0 dari 0 data",
-                    infoFiltered: "(difilter dari _MAX_ total data)",
-                    paginate: {
-                        first: "Pertama",
-                        last: "Terakhir",
-                        next: "Berikutnya",
-                        previous: "Sebelumnya"
-                    },
-                    zeroRecords: "Data tidak ditemukan"
-                }
-            });
+            $('#news-table').DataTable();
 
             $('.delete-form').submit(function(e){
                 e.preventDefault();

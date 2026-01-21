@@ -11,17 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('news', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
-            $table->string('name');
+            $table->string('title');
             $table->string('slug')->unique();
-            $table->decimal('price', 15, 2);
-            $table->bigInteger('stock')->default(0);
             $table->string('thumbnail')->nullable();
+            $table->text('excerpt')->nullable(); // Short summary
+            $table->longText('content')->nullable(); // Full content
             $table->boolean('is_featured')->default(false);
-            $table->text('description')->nullable();
-            $table->enum('status', ['published', 'draft', 'deleted'])->default('draft');
+            $table->enum('status', ['published','draft','deleted'])->default('draft');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
 
             // SEO
             $table->unsignedBigInteger('views')->default(0);
@@ -37,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('news');
     }
 };

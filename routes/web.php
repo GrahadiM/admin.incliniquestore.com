@@ -25,24 +25,24 @@ Route::middleware(['auth', 'active.user', 'role:admin|super-admin'])->group(func
     Route::middleware(['role:super-admin'])->prefix('super-admin')->name('super-admin.')->group(function () {
         Route::get('/dashboard', [\App\Http\Controllers\SuperAdmin\DashboardController::class, 'index'])->name('dashboard');
 
-        // Manage Users
-        Route::resource('users', \App\Http\Controllers\SuperAdmin\UserController::class);
+        // CRUD Resources
+        Route::resources([
+            'users' => \App\Http\Controllers\SuperAdmin\UserController::class,
+            'branches' => \App\Http\Controllers\SuperAdmin\BranchController::class,
+            'member-levels' => \App\Http\Controllers\SuperAdmin\MemberLevelController::class,
+            'vouchers' => \App\Http\Controllers\SuperAdmin\VoucherController::class,
+            'categories' => \App\Http\Controllers\SuperAdmin\CategoryController::class,
+            'products' => \App\Http\Controllers\SuperAdmin\ProductController::class,
+            'news' => \App\Http\Controllers\SuperAdmin\NewsController::class,
+        ]);
 
-        // Manage Branch Stores
-        Route::resource('branches', \App\Http\Controllers\SuperAdmin\BranchController::class);
-
-        // Manage Member Levels
-        Route::resource('member-levels', \App\Http\Controllers\SuperAdmin\MemberLevelController::class);
-
-        // Manage Vouchers
-        Route::resource('vouchers', \App\Http\Controllers\SuperAdmin\VoucherController::class);
-
-        // Manage Categories
-        Route::resource('categories', \App\Http\Controllers\SuperAdmin\CategoryController::class);
-
-        // Manage Products
-        Route::resource('products', \App\Http\Controllers\SuperAdmin\ProductController::class);
+        Route::get('news-preview/{slug}', [\App\Http\Controllers\SuperAdmin\NewsController::class, 'preview'])->name('news.preview');
+        Route::get('news-analytics', [\App\Http\Controllers\SuperAdmin\NewsController::class, 'analytics'])->name('news.analytics');
     });
 });
+
+// API / AJAX views
+Route::get('/news/{news}/views/realtime', fn(\App\Models\News $news) => response()->json(['views' => $news->views]))->name('news.views.realtime');
+
 
 require __DIR__.'/auth.php';

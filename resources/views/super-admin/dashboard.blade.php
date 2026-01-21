@@ -5,82 +5,70 @@
         </h2>
     </x-slot>
 
-    <div class="px-2 py-10">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="px-2 py-10 max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            {{-- ================= STATISTICS ================= --}}
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+        {{-- ================= MENU PORTAL ================= --}}
+        <x-menu-portal />
 
-                <div class="bg-white rounded-lg shadow p-6 border-l-4 border-blue-600">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-sm text-gray-500">Users</p>
-                            <h3 class="text-2xl font-bold">{{ $totalUsers }}</h3>
-                        </div>
-                        <i class="fas fa-users text-3xl text-blue-600"></i>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-lg shadow p-6 border-l-4 border-green-600">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-sm text-gray-500">Branches</p>
-                            <h3 class="text-2xl font-bold">{{ $totalBranches }}</h3>
-                        </div>
-                        <i class="fas fa-store text-3xl text-green-600"></i>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-lg shadow p-6 border-l-4 border-purple-600">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-sm text-gray-500">Products</p>
-                            <h3 class="text-2xl font-bold">{{ $totalProducts }}</h3>
-                        </div>
-                        <i class="fas fa-box text-3xl text-purple-600"></i>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-lg shadow p-6 border-l-4 border-orange-600">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-sm text-gray-500">Vouchers</p>
-                            <h3 class="text-2xl font-bold">{{ $totalVouchers }}</h3>
-                        </div>
-                        <i class="fas fa-ticket-alt text-3xl text-orange-600"></i>
-                    </div>
-                </div>
-
-            </div>
-
-
-            {{-- ================= MENU PORTAL ================= --}}
-            <h3 class="text-lg font-semibold mb-4">Management Portal</h3>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-
-                @php
-                    $menus = [
-                        ['title' => 'Users', 'icon' => 'fa-users', 'color' => 'blue', 'route' => 'super-admin.users.index'],
-                        ['title' => 'Branches', 'icon' => 'fa-store', 'color' => 'green', 'route' => 'super-admin.branches.index'],
-                        ['title' => 'Member Levels', 'icon' => 'fa-layer-group', 'color' => 'purple', 'route' => 'super-admin.member-levels.index'],
-                        ['title' => 'Vouchers', 'icon' => 'fa-ticket-alt', 'color' => 'orange', 'route' => 'super-admin.vouchers.index'],
-                        ['title' => 'Categories', 'icon' => 'fa-tags', 'color' => 'blue', 'route' => 'super-admin.categories.index'],
-                        ['title' => 'Products', 'icon' => 'fa-box', 'color' => 'green', 'route' => 'super-admin.products.index'],
-                    ];
-                @endphp
-
-                @foreach($menus as $menu)
-                    <a href="{{ route($menu['route']) }}" class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition border-t-4 border-{{ $menu['color'] }}-600">
-                        <div class="flex flex-col items-center text-center space-y-3">
-                            <i class="fas {{ $menu['icon'] }} text-4xl text-{{ $menu['color'] }}-600"></i>
-                            <h4 class="font-semibold">{{ $menu['title'] }}</h4>
-                        </div>
-                    </a>
-                @endforeach
-
-            </div>
-
+        {{-- ================= STATISTICS ================= --}}
+        <h3 class="text-lg font-semibold mb-4">Management Statistics</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+            <x-dashboard-card title="Total Users" value="{{ $totalUsers }}" icon="users" color="blue"/>
+            <x-dashboard-card title="Total Branches" value="{{ $totalBranches }}" icon="store" color="blue"/>
+            <x-dashboard-card title="Total Vouchers" value="{{ $totalVouchers }}" icon="ticket-alt" color="blue"/>
+            <x-dashboard-card title="Total Products" value="{{ $totalProducts }}" icon="box" color="blue"/>
+            <x-dashboard-card title="Total News" value="{{ $totalNews }}" icon="newspaper" color="blue"/>
+            <x-dashboard-card title="Published News" value="{{ $publishedNews }}" icon="check-circle" color="green"/>
+            <x-dashboard-card title="Draft News" value="{{ $draftNews }}" icon="file-alt" color="red"/>
+            <x-dashboard-card title="News Today" value="{{ $todayNews }}" icon="calendar-day" color="orange"/>
         </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-10">
+            {{-- ================= NEWS VIEWS CHART ================= --}}
+            <div class="col-span-3 bg-white rounded-lg shadow p-6 mb-10">
+                <h3 class="text-lg font-semibold mb-4">News Views Per Day</h3>
+                <canvas id="newsChart" height="100"></canvas>
+            </div>
+
+            {{-- ================= TOP NEWS ================= --}}
+            <div class="bg-white rounded-lg shadow p-6 mb-10">
+                <h3 class="text-lg font-semibold mb-4">Top 5 News (By Views)</h3>
+                <ul class="space-y-2">
+                    @foreach($topNews as $news)
+                        <li class="flex justify-between border-b py-2">
+                            <span>{{ Str::limit($news->title, 20) }}</span>
+                            <span class="font-bold">{{ number_format($news->views) }} views</span>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+
     </div>
+
+    @push('scripts')
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('newsChart');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: {!! json_encode($viewsPerDay->pluck('date')) !!},
+                datasets: [{
+                    label: 'Views',
+                    data: {!! json_encode($viewsPerDay->pluck('total')) !!},
+                    borderColor: 'rgb(75, 192, 192)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: true } },
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+    </script>
+    @endpush
 </x-app-layout>

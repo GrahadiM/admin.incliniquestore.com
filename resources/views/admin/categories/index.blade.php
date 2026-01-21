@@ -35,10 +35,10 @@
                             <td>{{ $category->name }}</td>
                             <td>{{ $category->slug }}</td>
                             <td>
-                                @if($category->status === 'active')
-                                    <span class="px-2 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded border border-green-300">Active</span>
+                                @if($category->status === 'published')
+                                    <span class="px-2 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded border border-green-300">Published</span>
                                 @else
-                                    <span class="px-2 py-1 text-xs font-semibold bg-red-100 text-red-800 rounded border border-red-300">Inactive</span>
+                                    <span class="px-2 py-1 text-xs font-semibold bg-red-100 text-red-800 rounded border border-red-300">Draft</span>
                                 @endif
                             </td>
                             <td class="flex gap-2">

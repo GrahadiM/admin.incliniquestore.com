@@ -21,10 +21,10 @@
                         <th>ID</th>
                         <th>Nama</th>
                         <th>Jumlah User</th>
-                        <th>Min Points</th>
-                        <th>Min Purchase</th>
-                        <th>Min Payment</th>
-                        <th>Discount %</th>
+                        <th>Min Point</th>
+                        <th>Min Pembelian</th>
+                        <th>Min Transaksi</th>
+                        <th>Diskon %</th>
                         <th>Status</th>
                         <th>Aksi</th>
                     </tr>
